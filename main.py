@@ -30,6 +30,10 @@ def validate(line: str) -> None:
         raise SystemExit(
             "Invalid line: entry must be a single line with no newline characters."
         )
+    if any(ord(ch) < 0x20 or ord(ch) == 0x7F for ch in line):
+        raise SystemExit(
+            "Invalid line: entry must not contain control characters."
+        )
     line.encode("utf-8")  # Entry must be valid UTF-8 text.
 
 
